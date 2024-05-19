@@ -11,7 +11,6 @@ const answer = sample(WORDS);
 console.info({ answer });
 
 function Game() {
-  // example of guesses state - [{ word: 'WORLD', id: sadl-asdl-... }, { word: 'HELLO' id: sadl-asdl-... }]
   const [guesses, setGuesses] = React.useState([]);
 
   const addGuessHandler = (tentativeGuess) => {
