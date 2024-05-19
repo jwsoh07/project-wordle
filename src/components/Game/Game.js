@@ -15,7 +15,7 @@ function Game() {
   const [guesses, setGuesses] = React.useState([]);
 
   const addGuessHandler = (word) => {
-    const nextGuesses = [...guesses, { word, id: crypto.randomUUID() }];
+    const nextGuesses = [...guesses, word];
     setGuesses(nextGuesses);
   }
 

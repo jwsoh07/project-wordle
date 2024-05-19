@@ -6,7 +6,7 @@ function GuessResults({ guesses }) {
       {guesses.map((guess, index) => {
         // since the order of the guesses won't change, 
         // it's safe to use the index for the keys.
-        return <p key={index} className="guess">{guess.word}</p>
+        return <p key={index} className="guess">{guess}</p>
       })}
     </div>
   );
