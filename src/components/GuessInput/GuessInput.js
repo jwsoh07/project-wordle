@@ -1,23 +1,23 @@
 import React from 'react';
 
 function GuessInput({ addGuessHandler }) {
-  const [guess, setGuess] = React.useState('');
+  const [tentativeGuess, setTentativeGuess] = React.useState('');
 
   return (
     <form className="guess-input-wrapper" onSubmit={(e) => {
       e.preventDefault();
-      addGuessHandler(guess);
-      setGuess('');
+      addGuessHandler(tentativeGuess);
+      setTentativeGuess('');
     }}>
       <label htmlFor="guess-input">Enter guess:</label>
       <input
         required
         id="guess-input"
         type="text"
-        value={guess}
+        value={tentativeGuess}
         maxLength={5}
         pattern=".{5,}"
-        onChange={(e) => setGuess(e.target.value.toUpperCase())}
+        onChange={(e) => setTentativeGuess(e.target.value.toUpperCase())}
       />
     </form>
   );
