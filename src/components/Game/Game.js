@@ -16,6 +16,7 @@ function Game() {
   // running | won | lost
   const [status, setStatus] = React.useState('running');
   const [guesses, setGuesses] = React.useState([]);
+  const [answer, setAnswer] = React.useState(sample(WORDS));
 
   const addGuessHandler = (tentativeGuess) => {
     const nextGuesses = [...guesses, tentativeGuess];
@@ -31,12 +32,31 @@ function Game() {
     }
   }
 
+  const restartGame = () => {
+    setGuesses([]);
+    setStatus('running');
+    setAnswer(sample(WORDS));
+  }
+
   return (
     <>
       <GuessResults guesses={guesses} answer={answer} />
       <GuessInput status={status} addGuessHandler={addGuessHandler} />
       {status === 'won' && <WonBanner numGuesses={guesses.length} />}
       {status === 'lost' && <LostBanner answer={answer} />}
+      {status !== 'running' &&
+        <button
+          style={{
+            position: 'absolute',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            border: '1px solid black',
+            borderRadius: '3px',
+            padding: '5px 15px'
+          }}
+          onClick={restartGame}
+        >Restart
+        </button>}
     </>
   );
 }
