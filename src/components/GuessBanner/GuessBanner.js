@@ -1,6 +1,6 @@
 import React from 'react';
 
-function GuessBanner({ type, numGuesses }) {
+function GuessBanner({ type, numGuesses, answer }) {
   let contents;
 
   if (type === "happy") {
@@ -13,7 +13,7 @@ function GuessBanner({ type, numGuesses }) {
 
   } else if (type === "sad") {
     contents = (
-      <p>Sorry, the correct answer is <strong>LEARN</strong>.</p>
+      <p>Sorry, the correct answer is <strong>{answer}</strong>.</p>
     )
   }
 
