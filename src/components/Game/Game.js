@@ -12,29 +12,30 @@ const answer = sample(WORDS);
 console.info({ answer });
 
 function Game() {
+  // running | won | lost
+  const [status, setStatus] = React.useState('running');
   const [guesses, setGuesses] = React.useState([]);
 
   const addGuessHandler = (tentativeGuess) => {
     const nextGuesses = [...guesses, tentativeGuess];
     setGuesses(nextGuesses);
+    updateGameStatus(tentativeGuess, nextGuesses);
   }
 
-  // display end of game results
-  let banner;
-
-  if (guesses[guesses.length - 1] === answer) {
-    banner = <GuessBanner type="happy" numGuesses={guesses.length} />;
-  }
-
-  if (guesses.length == 6 && !guesses.includes(answer)) {
-    banner = <GuessBanner type="sad" />
+  const updateGameStatus = (tentativeGuess, nextGuesses) => {
+    if (tentativeGuess === answer) {
+      setStatus('won')
+    } else if (nextGuesses.length == 6 && !nextGuesses.includes(answer)) {
+      setStatus('lost')
+    }
   }
 
   return (
     <>
       <GuessResults guesses={guesses} answer={answer} />
-      <GuessInput isGameOver={banner != undefined} addGuessHandler={addGuessHandler} />
-      {banner}
+      <GuessInput status={status} addGuessHandler={addGuessHandler} />
+      {status === 'won' && <GuessBanner type="happy" numGuesses={guesses.length} />}
+      {status === 'lost' && <GuessBanner type="sad" answer={answer} />}
     </>
   );
 }
