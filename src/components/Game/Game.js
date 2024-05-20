@@ -4,6 +4,7 @@ import { sample } from '../../utils';
 import { WORDS } from '../../data';
 import GuessInput from '../GuessInput/GuessInput';
 import GuessResults from '../GuessResults/GuessResults';
+import GuessBanner from '../GuessBanner/GuessBanner';
 
 // Pick a random word on every pageload.
 const answer = sample(WORDS);
@@ -18,10 +19,22 @@ function Game() {
     setGuesses(nextGuesses);
   }
 
+  // display end of game results
+  let banner;
+
+  if (guesses[guesses.length - 1] === answer) {
+    banner = <GuessBanner type="happy" numGuesses={guesses.length} />;
+  }
+
+  if (guesses.length == 6 && !guesses.includes(answer)) {
+    banner = <GuessBanner type="sad" />
+  }
+
   return (
     <>
       <GuessResults guesses={guesses} answer={answer} />
-      <GuessInput addGuessHandler={addGuessHandler} />
+      <GuessInput isGameOver={banner != undefined} addGuessHandler={addGuessHandler} />
+      {banner}
     </>
   );
 }
