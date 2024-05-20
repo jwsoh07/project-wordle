@@ -7,7 +7,10 @@ function GuessBanner({ type, numGuesses, answer }) {
     contents = (
       <p>
         <strong>Congratulations!</strong> Got it in {' '}
-        <strong>{numGuesses} guesses</strong>.
+        <strong>{numGuesses === 1
+          ? "1 guess"
+          : `${numGuesses} guesses`}
+        </strong>.
       </p>
     )
 
