@@ -1,7 +1,7 @@
 import React from 'react';
 import { checkGuess } from '../../game-helpers';
 
-function Guess({ word }) {
+function Guess({ word, answer }) {
   let letters;
 
   if (word) {
@@ -12,7 +12,8 @@ function Guess({ word }) {
     letters = [" ", " ", " ", " ", " "];
   }
 
-  const result = checkGuess(word, 'HAPPY');
+  // checkGuess will only run when there is a new guess word
+  const result = checkGuess(word, answer);
 
   return (
     <p className="guess">
