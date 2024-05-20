@@ -13,8 +13,6 @@ function Guess({ word }) {
   }
 
   const result = checkGuess(word, 'HAPPY');
-  console.log(result)
-  console.log(word)
 
   return (
     <p className="guess">
