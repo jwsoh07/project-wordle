@@ -193,6 +193,10 @@ h1 {
   color: white;
 }
 
+.keyboard-row {
+  display: flex;
+}
+
 .visually-hidden {
   position: absolute;
   overflow: hidden;

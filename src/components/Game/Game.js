@@ -1,8 +1,9 @@
 import React from "react";
 import Banner from "../Banner";
 import GuessInput from "../GuessInput";
+import Keyboard from "../Keyboard/Keyboard";
 
-import { checkGuess } from "../../game-helpers";
+import { checkGuess, generateInitialLetterStatuses } from "../../game-helpers";
 import { sample } from "../../utils";
 import { WORDS } from "../../data";
 import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
@@ -23,6 +24,9 @@ function Game() {
     { word: "", statuses: [] },
     { word: "", statuses: [] },
   ]);
+  const [letterStatuses, setLetterStatuses] = React.useState(() =>
+    generateInitialLetterStatuses()
+  );
   const [numAttempts, setNumAttempts] = React.useState(0);
 
   const lastGuessedWord =
@@ -44,6 +48,14 @@ function Game() {
     };
 
     setResults(nextResults);
+
+    const nextLetterStatuses = { ...letterStatuses };
+
+    statuses.forEach(({ letter, status }) => {
+      nextLetterStatuses[letter] = status;
+    });
+
+    setLetterStatuses(nextLetterStatuses);
     setNumAttempts(numAttempts + 1);
     setGuess("");
   };
@@ -53,6 +65,7 @@ function Game() {
     setResults(initialResults);
     setNumAttempts(0);
     setGuess("");
+    setLetterStatuses(generateInitialLetterStatuses());
 
     const nextAnswer = sample(WORDS);
     setAnswer(nextAnswer);
@@ -90,6 +103,7 @@ function Game() {
       {/* If I decided to implement the keyboard feature
           then I can consider placing it here.
       */}
+      <Keyboard letterStatuses={letterStatuses} />
 
       {gameEnded &&
         (lastGuessedWord === answer ? (
